@@ -26,16 +26,19 @@
 
         <div class="card">
             <div class="card-image">
-                <img src="{{juego.srcImage}}"" %} alt="Imagen del juego kirbi deluxe edition" >
+                <img src="{{juego.srcImage}}" alt="Imagen del juego kirbi deluxe edition" >
             </div>
             <div class="card-content">
                 <h3>{{juego.nombre}}</h3>
                 <p>{{juego.preview}}</p>
                 <p>&#36;{{juego.precio}}</p>
             </div>
-            <div class="input-div">
-                <input type="button" id="botonAgregar" name="botonAgregar" value="Agregar">
-            </div>
+            <form action="juego" method="get"> 
+                {% csrf_token %}
+                <div class="input-div">
+                    <button type="submit" id="juegoId" name="juegoId" value="{{juego.id}}">Ver</button>
+                </div>
+            </form>
         </div>
 
         {%endfor%}

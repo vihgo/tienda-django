@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static './css/juego.css' %}">
+    <link rel="stylesheet" href="{% static './css/spinner.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>Juego</title>
+</head>
+
+<body>
+    <div id="container">
+        <div id="backgroudBanner">
+            <img src="{{juego.srcImage}}"s>
+            <h2>{{juego.nombre}}</h2>
+            <p>{{juego.categoria}}</p>
+            <bold>{{juego.precio}}</bold>
+        </div>
+        <div id="descripcion">
+            <p>{{juego.descripcion}}</p>
+        </div>
+        
+       <form method="post" action="agregarComentario">
+        <textarea name="textoComentario"></textarea>
+        <button type="submit" name="btnAgregarComentario" col=10>Agregar comentario</button>
+
+       </form>
+
+    </div>
+   
+
+</body>
+
+</html>
