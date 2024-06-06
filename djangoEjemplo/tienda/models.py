@@ -3,6 +3,7 @@ from django.db import models
 # Create your models here.
 
 
+
 class Categoria(models.Model):
     nombre=models.CharField(default="default",max_length=50)
     definicion=models.TextField(blank=True)
@@ -21,6 +22,14 @@ class Juego(models.Model):
     
     def __str__(self):
         return str(self.nombre)
+    
+class Comentario(models.Model):
+    nombre= models.CharField(max_length=50)
+    comentario= models.CharField(max_length=250)
+    email=models.CharField(unique=True,max_length=100)
+    juego=models.ForeignKey(Juego, on_delete=models.CASCADE)
+    def __str__(self):
+        return str(self.email)
 
 class Desarrolladora(models.Model):
     nombre= models.CharField(max_length=50)

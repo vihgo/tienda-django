@@ -12,8 +12,8 @@
 
 <body>
     <div id="container">
-        <div id="backgroudBanner">
-            <img src="{{juego.srcImage}}"s>
+        <div id="topBanner">
+           <img src="{{juego.srcImage}}">
             <h2>{{juego.nombre}}</h2>
             <p>{{juego.categoria}}</p>
             <bold>{{juego.precio}}</bold>
@@ -22,9 +22,23 @@
             <p>{{juego.descripcion}}</p>
         </div>
         
-       <form method="post" action="agregarComentario">
-        <textarea name="textoComentario"></textarea>
-        <button type="submit" name="btnAgregarComentario" col=10>Agregar comentario</button>
+       <form method="post" action="juego">
+        {% csrf_token %}
+        <div class="input-container">
+            <input type="hidden" name="juegoId" value="{{juego.id}}" >
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre">
+            <label for="email">E-mail</label>
+            <input type="email" name="email">
+        </div>
+        <div class="input-container">
+            <label for="comentario">Comentario</label>
+            <textarea name="comentario"></textarea>
+        </div>
+        <div id="button-div">
+        
+            <button type="submit" name="btnAgregarComentario" col=10>Agregar comentario</button>
+        </div>
 
        </form>
 
