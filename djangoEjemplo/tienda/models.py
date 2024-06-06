@@ -26,8 +26,8 @@ class Juego(models.Model):
 class Comentario(models.Model):
     nombre= models.CharField(max_length=50)
     comentario= models.CharField(max_length=250)
-    email=models.CharField(unique=True,max_length=100)
-    juego=models.ForeignKey(Juego, on_delete=models.CASCADE)
+    email=models.CharField(max_length=100)
+    juego=models.ForeignKey(Juego, on_delete=models.CASCADE,related_name='comentarios')
     def __str__(self):
         return str(self.email)
 

@@ -7,13 +7,29 @@ def index(request):
     context={"RPG":juegos}
     return render(request,'tienda/index.html',context)
 
+def comentarioDelete(request,comentario_pk, juego_pk):
+    context={}
+
+    comentario=Comentario.objects.get(id=comentario_pk)
+    comentario.delete() 
+    juego= Juego.objects.get(id=juego_pk)
+    comentario=juego.comentarios.all().values()
+    context={"juego":juego, "comentarios":comentario}
+    return render(request,'tienda/juego.html',context)
+
+
+    
+
 def juego(request):
     
 
     if request.method !="POST":
         idx=request.GET['juegoId']
-        juego= Juego.objects.get(id=idx)
-        context={"juego":juego}
+        juegox= Juego.objects.get(id=idx)
+        objComentario=juegox.comentarios.all().values()
+        print("objComentario")
+        print(objComentario)
+        context={"juego":juegox, "comentarios":objComentario}
         
     else:
         idx=request.POST['juegoId']
@@ -24,6 +40,7 @@ def juego(request):
         email=request.POST['email']
         objComentario= Comentario.objects.create(nombre=nombre,comentario=comentario,email=email,juego=juego)
         objComentario.save()
-        context={"juego":juego, "comentario":objComentario}
+        objComentario=juego.comentarios.all().values()
+        context={"juego":juego, "comentarios":objComentario}
     
     return render(request,'tienda/juego.html', context)

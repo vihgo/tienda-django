@@ -21,7 +21,20 @@
         <div id="descripcion">
             <p>{{juego.descripcion}}</p>
         </div>
-        
+        <div>
+            {% if comentarios %}
+                {%for comentario in comentarios%}
+                    <div class="comentario">
+                        <h4>{{comentario.nombre}}</h4>
+                        <p>{{comentario.email}}</p>
+                        <p>{{comentario.comentario}}</p>
+                        <a href="{% url 'comentarioDelete' comentario_pk=comentario.id juego_pk=juego.id %}">Eliminar</a>
+                    </div>
+                   
+                {%endfor%}
+            {% endif %}
+
+        </div>
        <form method="post" action="juego">
         {% csrf_token %}
         <div class="input-container">
@@ -35,6 +48,9 @@
             <label for="comentario">Comentario</label>
             <textarea name="comentario"></textarea>
         </div>
+
+        
+
         <div id="button-div">
         
             <button type="submit" name="btnAgregarComentario" col=10>Agregar comentario</button>

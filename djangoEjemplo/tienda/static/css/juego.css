@@ -8,6 +8,22 @@
    padding: 10px 50px;
    
 }
+.comentario{
+    background-color: aliceblue;
+    border: 1px solid;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+.comentario p:nth-child(2){
+    font-size: 0.8rem;
+
+}
+.comentario p:nth-child(3){
+    padding: 10px;
+
+}
 
 #topBanner img{
     display: block;
