@@ -3,19 +3,18 @@ from .models import Juego,Comentario
 
 # Create your views here.
 def index(request):
-    juegos= Juego.objects.filter(categoria=1).values()
+    juegos= Juego.objects.all()
     context={"RPG":juegos}
     return render(request,'tienda/index.html',context)
 
-def comentarioDelete(request,comentario_pk, juego_pk):
-    context={}
+def comentarioDelete(request,comentario_pk):
 
     comentario=Comentario.objects.get(id=comentario_pk)
+    juego=comentario.juego
     comentario.delete() 
-    juego= Juego.objects.get(id=juego_pk)
-    comentario=juego.comentarios.all().values()
-    context={"juego":juego, "comentarios":comentario}
-    return render(request,'tienda/juego.html',context)
+    comentarios=Comentario.objects.filter(juego=juego)
+    context={"juego":juego, "comentarios":comentarios}
+    return render(request,'tienda/juego.html',context=context)
 
 
     
@@ -24,12 +23,11 @@ def juego(request):
     
 
     if request.method !="POST":
-        idx=request.GET['juegoId']
-        juegox= Juego.objects.get(id=idx)
-        objComentario=juegox.comentarios.all().values()
-        print("objComentario")
-        print(objComentario)
-        context={"juego":juegox, "comentarios":objComentario}
+        idx=request.GET['juego_id']
+        juego= Juego.objects.get(id=idx)
+        comentarios=Comentario.objects.filter(juego=juego)
+        #objComentario=juegox.comentarios.all().values()
+        context={"juego":juego, "comentarios":comentarios}
         
     else:
         idx=request.POST['juegoId']
@@ -40,7 +38,8 @@ def juego(request):
         email=request.POST['email']
         objComentario= Comentario.objects.create(nombre=nombre,comentario=comentario,email=email,juego=juego)
         objComentario.save()
-        objComentario=juego.comentarios.all().values()
-        context={"juego":juego, "comentarios":objComentario}
+        #comentarios=juego.comentarios.all().values()
+        comentarios=Comentario.objects.filter(juego=juego)
+        context={"juego":juego, "comentarios":comentarios}
     
     return render(request,'tienda/juego.html', context)

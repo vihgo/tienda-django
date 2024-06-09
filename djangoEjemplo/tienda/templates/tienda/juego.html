@@ -1,66 +1,98 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static './css/juego.css' %}">
-    <link rel="stylesheet" href="{% static './css/spinner.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <title>Juego</title>
-</head>
+{% extends "base.html" %}
 
-<body>
-    <div id="container">
-        <div id="topBanner">
-           <img src="{{juego.srcImage}}">
-            <h2>{{juego.nombre}}</h2>
-            <p>{{juego.categoria}}</p>
-            <bold>{{juego.precio}}</bold>
+    {% block title %}Juego{% endblock %}
+
+    {% block content %}
+    
+    <div class="box ">
+        <figure class="image is-2by1">
+            <img src="{{juego.srcImage}}">
+        </figure>
+        <div class="section">
+            <h2 class="title is-2">{{juego.nombre}}</h2>
+            <p class="subtitle is-5">{{juego.categoria}}</p>
+            <bold class="subtitle is-4">{{juego.precio}}</bold>
+            <br/>
         </div>
-        <div id="descripcion">
+
+        <div class="content section">
             <p>{{juego.descripcion}}</p>
         </div>
-        <div>
-            {% if comentarios %}
-                {%for comentario in comentarios%}
-                    <div class="comentario">
-                        <h4>{{comentario.nombre}}</h4>
-                        <p>{{comentario.email}}</p>
-                        <p>{{comentario.comentario}}</p>
-                        <a href="{% url 'comentarioDelete' comentario_pk=comentario.id juego_pk=juego.id %}">Eliminar</a>
-                    </div>
-                   
-                {%endfor%}
-            {% endif %}
-
-        </div>
-       <form method="post" action="juego">
-        {% csrf_token %}
-        <div class="input-container">
-            <input type="hidden" name="juegoId" value="{{juego.id}}" >
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre">
-            <label for="email">E-mail</label>
-            <input type="email" name="email">
-        </div>
-        <div class="input-container">
-            <label for="comentario">Comentario</label>
-            <textarea name="comentario"></textarea>
-        </div>
-
-        
-
-        <div id="button-div">
-        
-            <button type="submit" name="btnAgregarComentario" col=10>Agregar comentario</button>
-        </div>
-
-       </form>
-
     </div>
    
+    <div class="section">
+        {% if comentarios %}
+            {%for comentario in comentarios%}
+                <div class="card">
+                    
+                    <div class="card-header">
+                        <p class="card-header-title is-2">{{comentario.nombre}}</ps>
+                        <p clas="subtitle is-5">{{comentario.email}}</p>
+                    </div>
+                    <div class="card-content">
+                       
+                        <p>{{comentario.comentario}}</p>
+                        <br/>
+                        
+                    </div>
+                    <div class="level-right">
+                        <a class="level-item" href="{% url 'comentario_delete' comentario_pk=comentario.id %}">Eliminar</a>
+                              
+                    </div>
+                    <!---->
+                    
+                   
+                </div>
+                
+            {%endfor%}
+        {% endif %}
 
-</body>
+    </div>
+    <form class="box" method="post" action="juego">
+    {% csrf_token %}
+    
+       
+        <input type="hidden" name="juegoId" value="{{juego.id}}" >
+        <div class="field">
+            <label class="label">Nombre</label>
+            <div class="control">
+                <input class="input" type="text" name="nombre">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">E-mail</label>
+            <div class="control has-icons-left">
+                <input class="input" type="email" name="email">
 
-</html>
+                <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                  </span>
+            </div>
+        </div>
+
+        <div class="field">
+            <label class="label" for="label">Comentario</label>
+            <div class="control">
+                <textarea class="textarea" name="comentario"></textarea>
+            <div class="control has-icons-left">
+
+        </div>
+        
+        <div class="section">
+            <div class="field is-grouped is-grouped-right">
+                <div class="control">
+                    <button class="button is-primary" type="submit" name="btnAgregarComentario" col=10>Agregar comentario</button>
+                </div>
+            </div>
+        </div>
+    
+
+
+
+   
+
+    </form>
+
+    
+    {% endblock %}
+

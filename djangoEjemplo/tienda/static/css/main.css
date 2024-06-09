@@ -12,30 +12,32 @@
   'opsz' 48
 }
 
-#menuLateral{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    position: fixed;
-    right: 0;           
-    top: 0; 
-    background-color: red;
-    z-index: 1;
+.preview-content{
+    height: 80px ;
+}
+form{
+    margin-top: 50px;
+
+}
+
+.card-header p{
+    padding: 15px;
+
 }
 
 
-#container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+
+.container{
     border-top: 1px solid silver;
-    gap: 50px;
+    padding-top: 50px;
 }
 h3{
     height: 20px;
     font-size: 1rem;
 }
+
+
+
 @keyframes img-up{
     from { top:0px;}
     to { top:-13px;}
@@ -46,13 +48,8 @@ h3{
     to { width: 15vw}
 
 }
-.open-panel{
-    animation-name: cart-menu;
-    animation-timing-function: linear;
-    animation-duration: 0.4s;
-    animation-fill-mode: forwards;
-}
-div.card-image:hover img{
+
+/*div.card-image:hover img{
     animation-name: img-up;
     animation-timing-function: linear;
     animation-duration: 0.4s;
@@ -96,23 +93,11 @@ div.card-image:hover img{
     font-size: 0.9rem;
     color: rgb(15, 41, 41);
     
-}
-.input-div{
-    
-    align-self: flex-end;
-    margin-right: 30px;
-    margin-bottom: 20px;
-   
+}*/
 
-}
-input{
-    
-    width: 100%;
-    border-radius:5px;
-}
 
 @media (min-width:768px){
-    .card{
+    /*.card{
         max-width: 400px;
     }
 
@@ -128,7 +113,7 @@ input{
         from { width:0;}
         to { width: 300px}
     
-    }
+    }*/
 
 }
 

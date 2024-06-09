@@ -1,59 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static './css/main.css' %}">
-    <link rel="stylesheet" href="{% static './css/spinner.css' %}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <title>Carrito de compra</title>
-</head>
-<body>
-    <header>
-        <div >
-            <button type="menu" id="botonCarrito" >
-                <span class="material-symbols-outlined">shopping_cart</span>
-            </button>
-                
-        </div>
-    </header>
-    
-  
-    <main id="container">
 
-        {%for juego in RPG %}
+    {% extends "base.html" %}
+    {% block content %}
+        
+            <div class="fixed-grid has-1-cols-mobile has-3-cols-desktop">
+                <div class="grid">
 
-        <div class="card">
-            <div class="card-image">
-                <img src="{{juego.srcImage}}" alt="Imagen del juego kirbi deluxe edition" >
-            </div>
-            <div class="card-content">
-                <h3>{{juego.nombre}}</h3>
-                <p>{{juego.preview}}</p>
-                <p>&#36;{{juego.precio}}</p>
-            </div>
-            <form action="juego" method="get"> 
-                {% csrf_token %}
-                <div class="input-div">
-                    <button type="submit" id="juegoId" name="juegoId" value="{{juego.id}}">Ver</button>
+                    {%for juego in RPG %}
+                    
+                    <div class="card">
+                        <div class="card-image">
+                        <figure class="image is-3by3">
+                            <img
+                            src="{{juego.srcImage}}"
+                            alt="Placeholder image"
+                            />
+                        </figure>
+                        </div>
+                        <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <div class="level is-mobile">
+                                    <div class="level-left">
+                                        <p class="title is-4 level-item">{{juego.nombre}}</p>
+                                    </div>
+                                    <div class="level-right">
+                                        <p class="subtitle is-6 level-item">{{juego.categoria}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="content preview-content ">
+                            <p>{{juego.preview}}</p>
+                            
+                            <p>&#36;{{juego.precio}}</p>
+                        </div>
+                        
+                        <form  action="juego" method="get"> 
+                            {% csrf_token %}
+                            <div class="input-div">
+                                <button type="submit" id="juegoId" name="juego_id" value="{{juego.id}}">Ver</button>
+                            </div>
+                        </form>
+
+                        </div>
+                    </div>
+
+                    
+                    {%endfor%}
                 </div>
-            </form>
-        </div>
-
-        {%endfor%}
-        
-        
+            </div>
 
         
-       
-
-    </main>
-
-   
+    {% endblock %}
 
 
-<script type="module" src="{% static './js/app.js'%}"></script>
-</body>
+
+
 
 </html>
