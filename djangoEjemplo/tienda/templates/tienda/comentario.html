@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+    {% block title %}Comentario{% endblock %}
+
+    {% block content %}
+    
+    <div class="box ">
+        <figure class="image is-2by1">
+            <img src="{{juego.srcImage}}">
+        </figure>
+        <div class="section">
+            <h2 class="title is-2">{{juego.nombre}}</h2>
+            <p class="subtitle is-5">{{juego.categoria}}</p>
+            <bold class="subtitle is-4">{{juego.precio}}</bold>
+            <br/>
+        </div>
+
+        <div class="content section">
+            <p>{{juego.descripcion}}</p>
+        </div>
+    </div>
+   
+    
+    
+   
+       {% if comentario%}
+       <section class="section">
+        <form class="box" method="post" action="comentario_update">
+            {% csrf_token %}
+            <input type="hidden" name="comentario_id" value="{{comentario.id}}" >
+                
+                <div class="field">
+                    <label class="label">Nombre</label>
+                    <div class="control">
+                        <input class="input" type="text" name="nombre" value="{{comentario.nombre}}">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">E-mail</label>
+                    <div class="control has-icons-left">
+                        <input class="input" type="email" name="email" value="{{comentario.email}}">
+
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label class="label" for="label">Comentario</label>
+                    <div class="control">
+                        <textarea class="textarea" name="comentario" >{{comentario.comentario}}</textarea>
+                    <div class="control has-icons-left">
+
+                </div>
+                
+                <div class="section">
+                    <div class="field is-grouped is-grouped-right">
+                        <div class="control">
+                            <button class="button is-primary" type="submit" name="btnAgregarComentario" col=10>Editar comentario</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </section>
+       {% else %}
+       
+       <section class="hero is-info">
+        <div class="hero-body">
+            <div class="level">
+                <p class="title">Comentario ELiminado</p>
+                <p class="subtitle">El comentario ha sido eliminado</p>
+
+            </div>
+          
+        </div>
+      </section>
+
+       {% endif %}
+        
+    
+
+
+
+   
+
+
+    
+    {% endblock %}
+

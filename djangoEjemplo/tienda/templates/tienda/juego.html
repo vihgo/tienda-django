@@ -37,6 +37,7 @@
                     </div>
                     <div class="level-right">
                         <a class="level-item" href="{% url 'comentario_delete' comentario_pk=comentario.id %}">Eliminar</a>
+                        <a class="level-item" href="{% url 'comentario' comentario_pk=comentario.id %}">Editar</a>
                               
                     </div>
                     <!---->
@@ -51,7 +52,7 @@
     <form class="box" method="post" action="juego">
     {% csrf_token %}
     
-       
+        
         <input type="hidden" name="juegoId" value="{{juego.id}}" >
         <div class="field">
             <label class="label">Nombre</label>
