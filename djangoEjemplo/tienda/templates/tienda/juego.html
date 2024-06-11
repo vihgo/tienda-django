@@ -19,9 +19,10 @@
             <p>{{juego.descripcion}}</p>
         </div>
     </div>
-   
+    
+    {% if comentarios %}
     <div class="section">
-        {% if comentarios %}
+       
             {%for comentario in comentarios%}
                 <div class="card">
                     
