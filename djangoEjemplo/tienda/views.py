@@ -1,15 +1,28 @@
 from django.shortcuts import render,redirect
 from .models import Juego,Comentario
-
+from django.contrib.auth.views import logout_then_login
+from .forms import *
 # Create your views here.
 def index(request):
     juegos= Juego.objects.all()
     context={"RPG":juegos}
     return render(request,'tienda/index.html',context)
 
+def registro(request):
+
+    if request.method=='POST':
+        registro=RegistroForm(request.POST)
+        if registro.is_valid():
+            registro.save()
+            return redirect(to='login')
+    else:
+        registro= RegistroForm()
+
+    return render(request, 'tienda/registro.html',{'form':registro})
+
 def comentario(request,comentario_pk):
     comentario=Comentario.objects.get(id=comentario_pk)
-    juego=comentario.juego
+    juego=comentario.juego 
     context={"juego":juego, "comentario":comentario}
     return render(request,'tienda/comentario.html',context)
 
@@ -22,6 +35,9 @@ def comentarioUpdate(request):
     context={"juego":comentario.juego, "comentario":comentario}
     return render(request,'tienda/comentario.html',context)
 
+def logut(request):
+    return logout_then_login(request,login_url="login")
+    
 
 
 def comentarioDelete(request,comentario_pk):
