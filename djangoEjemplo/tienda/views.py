@@ -3,9 +3,31 @@ from .models import Juego,Comentario
 from django.contrib.auth.views import logout_then_login
 from .forms import *
 # Create your views here.
+
+def agregarAlCarro(request,juego_id):
+    carro=request.session.get("carro",[]) #intenta obtener la variable carro de la session, si no existe la crea
+    juego= Juego.objects.get(id=juego_id)
+    productoEnCarro=False
+    for juego_carro in carro:
+        if juego_carro[0]==juego_id:
+            productoEnCarro=True
+            juego_carro[4]+=1
+            juego_carro[5]=juego_carro[1]*juego_carro[4]
+            break
+
+    if productoEnCarro!=True:
+        carro.append([juego_id,juego.precio,juego.nombre,juego.srcImage,1,juego.precio*1])
+                     #  0           1           2               3       4       5
+
+    request.session["carro"]=carro
+    comentarios=Comentario.objects.filter(juego=juego)
+    #objComentario=juegox.comentarios.all().values()
+    context={"juego":juego, "comentarios":comentarios,"carro":request.session.get("carro",[])}
+    return render(request,'tienda/juego.html', context)
+
 def index(request):
     juegos= Juego.objects.all()
-    context={"RPG":juegos}
+    context={"juegos":juegos}
     return render(request,'tienda/index.html',context)
 
 def registro(request):

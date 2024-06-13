@@ -11,7 +11,10 @@
         <div class="section">
             <h2 class="title is-2">{{juego.nombre}}</h2>
             <p class="subtitle is-5">{{juego.categoria}}</p>
-            <bold class="subtitle is-4">{{juego.precio}}</bold>
+            <div class="level-left">
+                <bold class="subtitle is-4">{{juego.precio}}</bold>
+                <a href="{% url 'agregar_al_carrito'  juego_id=juego.id %}">Agregar al carro</a>
+            </div>
             <br/>
         </div>
 
@@ -19,6 +22,9 @@
             <p>{{juego.descripcion}}</p>
         </div>
     </div>
+    {%if carro%}
+    <p class="content">{{carro}}</p>
+    {% endif %}
     
     {% if comentarios %}
     <div class="section">
