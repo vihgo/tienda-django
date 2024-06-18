@@ -11,6 +11,7 @@ urlpatterns = [
     path('login',LoginView.as_view(template_name='tienda/login.html'),name="login"),
     path('logout',views.logut,name='logout'),
     path('registro',views.registro,name='registrarse'),
-    path('agregar_al_carrito/<juego_id>',views.agregarAlCarro, name='agregar_al_carrito')
+    path('agregar_al_carrito/<juego_id>',views.agregarAlCarro, name='agregar_al_carrito'),
+    path('carro',views.carro,name='carro')
 ]
 #<!--{% url 'comentarioDelete' comentario_pk=comentario.id juego_pk=juego.id %}-->

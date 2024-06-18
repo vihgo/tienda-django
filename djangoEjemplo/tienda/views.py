@@ -8,22 +8,33 @@ def agregarAlCarro(request,juego_id):
     carro=request.session.get("carro",[]) #intenta obtener la variable carro de la session, si no existe la crea
     juego= Juego.objects.get(id=juego_id)
     productoEnCarro=False
+   
     for juego_carro in carro:
-        if juego_carro[0]==juego_id:
+        if juego_carro['id']==juego_id:
             productoEnCarro=True
-            juego_carro[4]+=1
-            juego_carro[5]=juego_carro[1]*juego_carro[4]
+            juego_carro['cantidad']+=1
+            juego_carro['total']=juego_carro['cantidad']*juego_carro['precio']
             break
-
-    if productoEnCarro!=True:
-        carro.append([juego_id,juego.precio,juego.nombre,juego.srcImage,1,juego.precio*1])
-                     #  0           1           2               3       4       5
+    
+    if productoEnCarro==False:
+        carro.append({"id":juego_id,"categoria":juego.categoria.nombre,"precio":juego.precio,"nombre":juego.nombre,"src_image":juego.srcImage,"cantidad":1,"total":juego.precio*1})
+    total=0
+    for juego_carro in carro:
+        total+=juego_carro['total']
+        request.session["total_carro"]=total
 
     request.session["carro"]=carro
-    comentarios=Comentario.objects.filter(juego=juego)
     #objComentario=juegox.comentarios.all().values()
-    context={"juego":juego, "comentarios":comentarios,"carro":request.session.get("carro",[])}
+    context={"juego":juego, "tamaño_carrito":len(carro)}
     return render(request,'tienda/juego.html', context)
+
+def carro(request):
+    
+    carro=request.session.get("carro",[]) #intenta obtener la variable carro de la session, si no existe la crea
+    #carro.append([juego_id,juego.precio,juego.nombre,juego.srcImage,1,juego.precio*1])
+    context={"carro":carro, "total_carro":request.session.get("total_carro",0)}
+    print(carro)
+    return render(request,'tienda/carrito.html', context)
 
 def index(request):
     juegos= Juego.objects.all()

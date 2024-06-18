@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}Juego{% endblock %}
+
+{% block content %}
+{% if carro %}
+<div class="box ">
+{%for item in carro%}
+<!--[id,precio,nombre,src_image,1,total]-->
+    <div class="container">
+        <div class="columns is-vcentered">
+        
+            <div class="column">
+
+
+                <figure class="image is-128x128">
+                    <img src="{{item.src_image}}" />
+                </figure>
+
+            </div>
+            <div class="column">
+                <div>
+                    <p class="title is-5">{{item.nombre}}</p>
+                    <p class="subtitle is-6">{{item.categoria}}</p>
+                </div>
+
+
+            </div>
+
+
+            <div class="column">
+                <p name="precio">${{item.precio}}</p>
+                <p>descuento</p>
+
+            </div>
+
+            <div class="column">
+                <div class="box">
+                    <div class="level">
+                        <div class="level-item">
+
+                            <button class="button is-small">-</button>
+
+
+                        </div>
+                        <div class="level-item">
+
+
+                            <b class="has-text-success">{{item.cantidad}}</b>
+
+
+                        </div>
+                        <div class="level-item">
+
+
+                            <button class="button is-small">+</button>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="column">
+                <!--Total-->
+                <p class="total-carroto"></p>
+
+            </div>
+
+            <div class="column">
+                <!--Eliminar-->
+                <button class="delete"></button>
+
+            </div>
+
+
+        </div>
+
+        <div class="level">
+            <div class="level-right">
+                <div class="section level-item">
+                    <!--totales y esas cosas-->
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+
+</div>
+    {% endif %}
+
+
+
+
+
+
+
+    {% endblock %}

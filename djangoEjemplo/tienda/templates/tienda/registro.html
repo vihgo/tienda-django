@@ -3,11 +3,13 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-
-    <form action="" method="post">
-    {% csrf_token %}
-    {{form}}
-    <button type="submit" class="button is-primary">Registrarse</button>
+    
+    <form class="container-form box " action="" method="post">
+        {% csrf_token %}
+        {{form}}
+        <div class="section level-right">
+            <button type="submit" class="button is-primary">Registrarse</button>
+        </div>
     </form>
 
 {% endblock%}

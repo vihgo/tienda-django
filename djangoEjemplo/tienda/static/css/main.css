@@ -15,8 +15,10 @@
 .preview-content{
     height: 80px ;
 }
-form{
+.container-form{
     margin-top: 50px;
+    max-width: 40vw;
+    margin: auto;
 
 }
 
@@ -48,6 +50,7 @@ h3{
     to { width: 15vw}
 
 }
+
 
 /*div.card-image:hover img{
     animation-name: img-up;
