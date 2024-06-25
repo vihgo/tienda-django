@@ -39,21 +39,21 @@
                     <div class="level">
                         <div class="level-item">
 
-                            <button class="button is-small">-</button>
+                            <button class="button is-small" onclick="reducirCantidad(event)"">-</button>
 
 
                         </div>
                         <div class="level-item">
 
 
-                            <b class="has-text-success">{{item.cantidad}}</b>
+                            <b class="has-text-success" name="cantidad">{{item.cantidad}}</b>
 
 
                         </div>
                         <div class="level-item">
 
 
-                            <button class="button is-small">+</button>
+                            <button class="button is-small" onclick="aumentarCantidad(event)">+</button>
 
                         </div>
                     </div>
@@ -63,7 +63,7 @@
             </div>
             <div class="column">
                 <!--Total-->
-                <p class="total-carroto"></p>
+                <p class="total-item" name="total-item">{{item.total}}</p>
 
             </div>
 
@@ -76,17 +76,37 @@
 
         </div>
 
-        <div class="level">
-            <div class="level-right">
-                <div class="section level-item">
-                    <!--totales y esas cosas-->
-                </div>
-            </div>
-        </div>
+        
     </div>
     {%endfor%}
+    
+    <div class="section">
+        <div class="level-right">
+            <!--totales y esas cosas-->
+            <div class="columns">
+                <div class="column">
+                    <p class="">Subtotal</p>
+                    <p class="" >IVA</p>
+                    <p class="">Total</p>
+                </div>
+                <div class="column">
+                    <p class="">$55000</p>
+                    <p class="">$12000</p>
+                </div>
+            </div>
+            
+           
+          
+        </div>
+    </div>
+    
 
 </div>
+
+    {% load static %}
+
+    <script  src="{% static './js/carrito.js'%}"></script>
+
     {% endif %}
 
 
